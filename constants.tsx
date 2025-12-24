@@ -4,7 +4,7 @@ import { MetricCategory } from './types';
 export const DASHBOARD_CATEGORIES: MetricCategory[] = [
   {
     id: 'storage',
-    label: '存儲矩陣',
+    label: '儲能矩陣',
     icon: 'HardDrive',
     color: '#06b6d4',
     description: 'Storage array health and allocation.',
@@ -17,7 +17,7 @@ export const DASHBOARD_CATEGORIES: MetricCategory[] = [
   },
   {
     id: 'compute',
-    label: '計算核心',
+    label: '數據分析',
     icon: 'Cpu',
     color: '#8b5cf6',
     description: 'Processing power and neural load.',
