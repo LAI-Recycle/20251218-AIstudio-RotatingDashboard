@@ -1,5 +1,6 @@
 
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { SubMetric } from '../types';
 import * as LucideIcons from 'lucide-react';
 
@@ -10,14 +11,29 @@ interface MetricCardProps {
 
 const MetricCard: React.FC<MetricCardProps> = ({ data, index }) => {
   const Icon = (LucideIcons as any)[data.icon] || LucideIcons.Activity;
+  const [isHighlighted, setIsHighlighted] = useState(false);
+
+  // Flash effect when data changes (i.e. when new category locks in)
+  useEffect(() => {
+    setIsHighlighted(true);
+    const timer = setTimeout(() => setIsHighlighted(false), 600);
+    return () => clearTimeout(timer);
+  }, [data]);
 
   return (
     <div 
-      className="relative p-6 rounded-2xl border border-slate-800 bg-slate-900/40 backdrop-blur-xl group hover:bg-slate-900/60 transition-all duration-500 overflow-hidden"
+      className={`relative p-6 rounded-2xl border backdrop-blur-xl group transition-all duration-500 overflow-hidden
+        ${isHighlighted 
+            ? 'bg-slate-800/80 border-cyan-500/50 shadow-[0_0_30px_rgba(34,211,238,0.25)] scale-[1.02] z-10' 
+            : 'border-slate-800 bg-slate-900/40 hover:bg-slate-900/60'
+        }
+      `}
     >
-      {/* Synchronization Glow */}
+      {/* Synchronization Glow - Flashes on update */}
       <div 
-        className="absolute top-0 left-0 w-1.5 h-full opacity-40 group-hover:opacity-100 transition-opacity"
+        className={`absolute top-0 left-0 w-1.5 h-full transition-opacity duration-500
+             ${isHighlighted ? 'opacity-100' : 'opacity-40 group-hover:opacity-100'}
+        `}
         style={{ backgroundColor: data.color, boxShadow: `0 0 15px ${data.color}` }}
       />
       
@@ -33,7 +49,7 @@ const MetricCard: React.FC<MetricCardProps> = ({ data, index }) => {
               Ch-0{index + 1}
             </span>
             <div className="flex gap-0.5 mt-1">
-                <div className="w-1 h-1 rounded-full bg-cyan-500/40" />
+                <div className={`w-1 h-1 rounded-full ${isHighlighted ? 'bg-cyan-400' : 'bg-cyan-500/40'} transition-colors`} />
                 <div className="w-1 h-1 rounded-full bg-cyan-500/20" />
             </div>
         </div>
@@ -44,7 +60,7 @@ const MetricCard: React.FC<MetricCardProps> = ({ data, index }) => {
       </p>
       
       <div className="flex items-baseline gap-2">
-        <span className="text-3xl font-orbitron font-black text-white group-hover:text-cyan-50 transition-colors">
+        <span className={`text-3xl font-orbitron font-black transition-colors ${isHighlighted ? 'text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]' : 'text-white group-hover:text-cyan-50'}`}>
           {data.value}
         </span>
         <span className="text-slate-500 text-[11px] font-bold uppercase tracking-widest">
@@ -70,3 +86,4 @@ const MetricCard: React.FC<MetricCardProps> = ({ data, index }) => {
 };
 
 export default MetricCard;
+

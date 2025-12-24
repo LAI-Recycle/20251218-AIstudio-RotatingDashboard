@@ -56,5 +56,5 @@ export const DASHBOARD_CATEGORIES: MetricCategory[] = [
   }
 ];
 
-export const ROTATION_SPEED = 0.25; // Adjusted for a smoother experience
-export const DWELL_DURATION = 3000; // Stay for 3 seconds on each item
+export const ROTATION_SPEED = 0.50// Adjusted for a smoother experience
+export const DWELL_DURATION = 3000; // Stay for 1 seconds on each item
