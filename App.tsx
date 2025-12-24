@@ -100,7 +100,7 @@ const App: React.FC = () => {
             </div>
             <div>
                 <h1 className="font-orbitron text-lg lg:text-xl font-black tracking-[0.3em] text-white leading-none">
-                    AEGIS OS
+                    綠岩能源 儀表板 GR energy
                 </h1>
                 <p className="text-[9px] lg:text-[10px] text-cyan-500 font-mono tracking-widest mt-1 opacity-60">
                    KERNEL V.42.1 // SECTOR-07
